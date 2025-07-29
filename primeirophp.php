@@ -89,6 +89,22 @@ echo "<br>";
 echo "A cidade é ". $arassosiativo["cidade"];
 echo "<br>";
 
+$pessoa = [
+    "nome" => "Robson",
+    "idade" => 28,
+    "cidade" => "São Paulo",
+    "profissão" => "Programador",
+    "graduação" => "Engenharia de Software"
+];
+
+$maioridade = 18;
+
+if($pessoa["idade"] >= $maioridade) {
+    echo "O " . $pessoa["nome"] . " tem" . $pessoa["idade"] . " anos e é maior de idade, mora em " . $pessoa["cidade"] . 
+    " e trabalha como " . $pessoa["profissão"] . "e é formada em" . $pessoa["graduação"] . ".<br>";
+} else {
+    echo "A pessoa é menor de idade";
+}
 
 if(is_array($lista)){
     echo "A variável é um array<br>";
@@ -120,6 +136,82 @@ is_numeric($num) ? print("É numérica") : print("Não é numérica  ");
 TAMBÉM PODE SER USADO O OPERADOR TERNÁRIO PARA CONDICIONAIS 
 */  
 
+// Definindo uma classe Pessoa
+// A classe Pessoa tem três atributos: nome, idade e cidade
+
+class Pessoa {
+    public $nome;
+    public $idade;
+    public $cidade;
+
+    public function __construct($nome, $idade, $cidade) {
+        $this->nome = $nome;
+        $this->idade = $idade;
+        $this->cidade = $cidade;
+    }
+
+    public function apresentar() {
+        echo "Meu nome é {$this->nome}, tenho {$this->idade} anos e moro em {$this->cidade}.<br>";
+    }
+}
+
+
+class Profissional extends Pessoa {
+    public $profissao;
+    public $graduacao;
+
+    // Apenas $graduacao é opcional
+    public function __construct($nome, $idade, $cidade, $profissao, $graduacao = null) {
+        parent::__construct($nome, $idade, $cidade);
+        $this->profissao = $profissao;
+        $this->graduacao = $graduacao ?? "Não informado";
+    }
+
+    public function apresentarProfissional() {
+        echo "Minha profissão é {$this->profissao} e minha graduação é {$this->graduacao}.<br>";
+    }
+}
+
+class NovaApresentacao extends Profissional {
+    public $hob1;
+    public $hob2;
+
+    public function __construct($nome, $idade, $cidade, $profissao, $graduacao = null, $hob1, $hob2) {
+        parent::__construct($nome, $idade, $cidade, $profissao, $graduacao);
+        $this->hob1 = $hob1;
+        $this->hob2 = $hob2;
+    }
+
+    public function apresentarHobbies() {
+        echo "Meus hobbies são: {$this->hob1} e {$this->hob2}.<br>";
+    }
+
+    public function apresentarTudo() {
+        $this->apresentar();
+        $this->apresentarProfissional();
+        $this->apresentarHobbies();
+    }
+}
+
+echo "<hr>";
+// Criando objeto passando graduação (completa)
+$p1 = new NovaApresentacao("Robson", 28, "São Paulo", "Programador", "Engenharia de Software", "Jogar CS2", "Fazer churrasco");
+$p1->apresentarTudo();
+
+echo "<hr>";
+
+// Criando objeto SEM passar graduação (vai mostrar "Não informado")
+$p2 = new NovaApresentacao("Robson", 28, "São Paulo", "Programador", null, "Jogar CS2", "Fazer churrasco");
+$p2->apresentarTudo();
+
+echo "<hr>";
+
+$x = "teste";
+echo $x . "<br>";
+$$x = "teste2"; // Variável variável
+echo $teste . "<br>"; // Imprime o valor da variável variável, que é 5
+$$teste2 = "valor"; // Variável variável com valor numérico
+echo $teste2 . "<br>"; // Imprime o valor da variável variável, que é "
 
 
 ?>
