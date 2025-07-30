@@ -214,4 +214,61 @@ $$teste2 = "valor"; // Variável variável com valor numérico
 echo $teste2 . "<br>"; // Imprime o valor da variável variável, que é "
 
 
+$testeglobal = "teste global";
+echo $testeglobal . "<br>"; // Imprime o valor da variável global
+// Modificando a variável global dentro do escopo global
+if (5 > 2) {
+    $testeglobal = "teste global modificado";
+    echo $testeglobal . "<br>"; // Imprime o valor modificado da variável global
+}
+
+echo $testeglobal . "<br>"; // Imprime o valor modificado da variável global fora do escopo
+
+function teste() {
+    global $testeglobal; // Acessa a variável global dentro da função
+    $testeglobal = "teste global dentro da função";
+    echo $testeglobal . "<br>"; // Imprime o valor da variável global
+}
+
+teste(); // Chama a função que imprime o valor da variável global
+echo $testeglobal . "<br>"; // Imprime o valor da variável global fora da função
+echo "<hr>";
+
+// Exemplo de escopo de estatico
+
+function estatico() {
+    $testeestatico = 0;
+    $testeestatico++;
+    echo "Contador: " . $testeestatico . "<br>";
+}
+
+estatico(); // Chama a função que incrementa o contador
+estatico(); // Chama novamente a função que incrementa o contador   
+estatico(); // Chama novamente a função que incrementa o contador
+
+echo "<br>";
+
+function estatico2() {
+    static $testeestatico2 = 0; // Variável estática
+    $testeestatico2++;
+    echo "Contador: " . $testeestatico2 . "<br>";
+}
+
+estatico2(); // Chama a função que incrementa o contador
+estatico2(); // Chama novamente a função que incrementa o contador   
+estatico2(); // Chama novamente a função que incrementa o contador
+
+echo "<hr>";
+
+function soma($a, $b) {
+    echo $a + $b;
+}
+
+soma(10, 5); // Chama a função que soma os dois números
+soma(20, 30); // Chama novamente a função que soma os dois números  
+soma(100, 200); // Chama novamente a função que soma os dois números
+
+echo "<hr>";
+
+
 ?>
